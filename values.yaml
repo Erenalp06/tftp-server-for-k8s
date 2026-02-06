@@ -1,0 +1,48 @@
+replicaCount: 1
+
+image:
+  repository: atmoz/tftp
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 69
+
+persistence:
+  enabled: false
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+  storageClassName: ""
+  mountPath: /var/tftp
+
+resources: {}
+
+podSecurityContext:
+  fsGroup: 65534
+
+securityContext:
+  runAsUser: 65534
+  runAsGroup: 65534
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  - name: TFTP_USERNAME
+    value: ""
+  - name: TFTP_PASSWORD
+    value: ""
+  - name: TFTP_DIRECTORY
+    value: "/var/tftp"
+
+extraEnv: []
+
+nameOverride: ""
+fullnameOverride: ""
